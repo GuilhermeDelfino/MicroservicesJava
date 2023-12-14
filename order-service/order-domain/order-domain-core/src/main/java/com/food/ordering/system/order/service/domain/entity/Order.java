@@ -14,7 +14,7 @@ public class Order extends AggregateRoot<OrderId> {
     private final CustomerId customerId;
     private final RestaurantId restaurantId;
 
-    private final StreetAddress streetAddress;
+    private final StreetAddress deliveryAddress;
 
     private final Money price;
     private final List<OrderItem> items;
@@ -117,7 +117,7 @@ public class Order extends AggregateRoot<OrderId> {
         }
     }
 
-    public void cancel(){
+    public void cancel(List<String> failuresMessages){
         if(!(orderStatus == OrderStatus.CANCELLING || orderStatus == OrderStatus.PENDING)){
             throw new OrderDomainException("Order is not in correct state for cancel operation");
         }
@@ -128,7 +128,7 @@ public class Order extends AggregateRoot<OrderId> {
         super.setId(builder.orderId);
         customerId = builder.customerId;
         restaurantId = builder.restaurantId;
-        streetAddress = builder.streetAddress;
+        deliveryAddress = builder.streetAddress;
         price = builder.price;
         items = builder.items;
         trackingId = builder.trackingId;
@@ -141,9 +141,6 @@ public class Order extends AggregateRoot<OrderId> {
     }
     public RestaurantId getRestaurantId() {
         return restaurantId;
-    }
-    public StreetAddress getStreetAddress() {
-        return streetAddress;
     }
     public Money getPrice() {
         return price;
@@ -160,6 +157,11 @@ public class Order extends AggregateRoot<OrderId> {
     public List<String> getFailuresMessages() {
         return failuresMessages;
     }
+
+    public StreetAddress getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
     public static final class Builder {
         private OrderId orderId;
         private CustomerId customerId;
@@ -193,7 +195,7 @@ public class Order extends AggregateRoot<OrderId> {
             return this;
         }
 
-        public Builder streetAddress(StreetAddress val) {
+        public Builder deliveryAddress(StreetAddress val) {
             streetAddress = val;
             return this;
         }
