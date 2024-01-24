@@ -13,18 +13,14 @@ import java.util.UUID;
 public class Order extends AggregateRoot<OrderId> {
     private final CustomerId customerId;
     private final RestaurantId restaurantId;
-
     private final StreetAddress deliveryAddress;
-
     private final Money price;
     private final List<OrderItem> items;
-
     private TrackingId trackingId;
     private OrderStatus orderStatus;
-
     private List<String> failuresMessages;
 
-
+    public static final String FAILURE_MESSAGE_DELIMITER = ",";
 
     public void initializeOrder(){
         setId(new OrderId(UUID.randomUUID()));
@@ -57,7 +53,7 @@ public class Order extends AggregateRoot<OrderId> {
 
         if(!price.equals(orderItemsTotal)){
             throw new OrderDomainException("Total price: " + price.getAmount() +
-                        "is not equal to Order items total: " + orderItemsTotal.getAmount());
+                        " is not equal to Order items total: " + orderItemsTotal.getAmount());
         }
     }
 

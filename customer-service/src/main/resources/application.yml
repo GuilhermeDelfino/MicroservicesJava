@@ -1,0 +1,24 @@
+server:
+  post: 8184
+
+spring:
+  jpa:
+    # best performance holding connections
+    open-in-view: false
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+  datasource:
+    # binaryTransfer = faster to transfer between the database and jdbc driver
+    # reWriteBatchedInserts = faster in batched insert statement
+    # stringtype = unspecified => save order id no problem in postgres
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=customer&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    platform: postgres
+    data: classpath:init-data.sql
+    schema: classpath:init-schema.sql
+    initialization-mode: always
