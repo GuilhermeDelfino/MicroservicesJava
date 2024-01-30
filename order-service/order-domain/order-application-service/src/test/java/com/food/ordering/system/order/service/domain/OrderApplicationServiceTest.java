@@ -66,7 +66,7 @@ public class OrderApplicationServiceTest {
                 .address(
                         OrderAddress.builder()
                                 .street("street-1")
-                                .zipCode("1000AB")
+                                .postalCode("1000AB")
                                 .city("Paris")
                                 .build()
                 )
@@ -93,7 +93,7 @@ public class OrderApplicationServiceTest {
                 .address(
                         OrderAddress.builder()
                                 .street("street-1")
-                                .zipCode("1000AB")
+                                .postalCode("1000AB")
                                 .city("Paris")
                                 .build()
                 )
@@ -120,7 +120,7 @@ public class OrderApplicationServiceTest {
                 .address(
                         OrderAddress.builder()
                                 .street("street-1")
-                                .zipCode("1000AB")
+                                .postalCode("1000AB")
                                 .city("Paris")
                                 .build()
                 )
